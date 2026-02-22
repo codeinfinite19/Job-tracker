@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+   
+      
+    <!-- Tailwind + DaisyUI -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- FondOwsome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Fond -->
+     <style>
+        *{
+              font-family: "Outfit", sans-serif;
+        }
+     </style>
+     
+
+</head>
+<body class="bg-[#F8FAFC] ">
+    <header class="w-[80%] mx-auto">
+       
+            <h1 class="text-6xl font-bold py-10">Job Tracker</h1>
+            <div  class="grid grid-cols-3 gap-4">
+                <div class="show-job bg-white shadow-lg text-center h-full p-4">
+                    <p>Total</p>
+                    <h2>8</h2>
+                </div>
+                <div class="show-job bg-white shadow-lg text-center h-full p-4">
+                    <p>Interviews</p>
+                    <h2 class="text-green-500 font-bold">8</h2>
+                </div>
+                <div class="show-job bg-white shadow-lg text-center h-full p-4">
+                    <p>Rejected</p>
+                    <h2 class="text-red-500 font-bold">8</h2>
+                </div>
+                
+            </div>
+       
+
+    </header>
+    <div class="w-[80%] mx-auto h-[1px] bg-slate-600 my-15"></div>
+    <main class="w-[80%] mx-auto">
+
+        <section class="">
+            <h2 class="text-3xl font-bold pb-4">Available Jobs</h2>
+            <div class="flex gap-4 py-4 ">
+            <button class="btn btn-primary">All</button>
+            <button class="btn btn-primary">Interviews</button>
+            <button class="btn btn-primary">Rejected</button>
+            </div>
+            
+            <div>
+                <div class="bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg">
+                    <h2 class="text-2xl font-bold">Moblie First Crop</h2>
+                    <p>React Native Developer</p>
+                    <p>Remote . Full-time . $130,000 -$175,000</p>
+                    <button class="btn btn-soft">NOT APPLIED</button>
+                    <p>Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div>
+                        <button class="btn btn-primary">INTERVIEW</button>
+                        <button class="btn btn-error">REJECTED</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+ <script src="./script/script.js"></script>   
+</body>
+</html>
