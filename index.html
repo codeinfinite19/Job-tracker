@@ -29,15 +29,15 @@
             <div  class="grid grid-cols-3 gap-4">
                 <div class="show-job bg-white shadow-lg text-center h-full p-4">
                     <p>Total</p>
-                    <h2>8</h2>
+                    <h2 id="total-job" class="font-bold">8</h2>
                 </div>
                 <div class="show-job bg-white shadow-lg text-center h-full p-4">
                     <p>Interviews</p>
-                    <h2 class="text-green-500 font-bold">8</h2>
+                    <h2 id="all-interviews" class="text-green-500 font-bold">8</h2>
                 </div>
                 <div class="show-job bg-white shadow-lg text-center h-full p-4">
                     <p>Rejected</p>
-                    <h2 class="text-red-500 font-bold">8</h2>
+                    <h2 id="all-rejected" class="text-red-500 font-bold">8</h2>
                 </div>
                 
             </div>
@@ -48,26 +48,79 @@
     <main class="w-[80%] mx-auto">
 
         <section class="">
+           
             <h2 class="text-3xl font-bold pb-4">Available Jobs</h2>
+                
             <div class="flex gap-4 py-4 ">
-            <button class="btn btn-primary">All</button>
-            <button class="btn btn-primary">Interviews</button>
-            <button class="btn btn-primary">Rejected</button>
+            <button id="all-jobFilter" class="btn btn-primary" onclick="togglestyle('all-jobFilter')">All</button>
+            <button id="all-interviewfilter" class="btn btn-outline" onclick="togglestyle('all-interviewfilter')">Interviews</button>
+            <button id="all-rejectedfilter" class="btn btn-outline" onclick="togglestyle('all-rejectedfilter')">Rejected</button>
             </div>
+
+            </section>
+
+            <!-- Filter Job -->
+             <section id="filtered-section">
+
+             </section>
             
-            <div>
+            <!-- job card -->
+        <section id="all-jobs" class="py-4">
+            
                 <div class="bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg">
-                    <h2 class="text-2xl font-bold">Moblie First Crop</h2>
+                    <div class="flex justify-between">
+                        <h2 class="job-name text-2xl font-bold">Moblie First Crop</h2>
+                        <button class="btn btn-soft bg-transparent mx-4 rounded-[50%] text-1xl px-1 py-1"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                    
+                    <p class="job-title">React Native Developer</p>
+                    <p class="job-salary">Remote . Full-time . $130,000 -$175,000</p>
+                    <h4 id="application-condition" class="job-application-condition bg-blue-100 rounded-lg p-2 inline-block">NOT APPLIED</h4>
+                    <p class="job-end-title">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+
+                    <div>
+                        <button id="gate-interview" class="btn btn-primary">INTERVIEW</button>
+                        <button id="gate-rejected" class="btn btn-error">REJECTED</button>
+                    </div>
+
+                </div>
+           
+           
+                <div class="bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg">
+                    <div class="flex justify-between">
+                        <h2 class="text-2xl font-bold">Moblie First Crop</h2>
+                        <button class="btn btn-soft bg-transparent mx-4 rounded-[50%] text-1xl px-1 py-1"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                    
                     <p>React Native Developer</p>
                     <p>Remote . Full-time . $130,000 -$175,000</p>
-                    <button class="btn btn-soft">NOT APPLIED</button>
+                   <h4 id="application-condition" class="bg-blue-100 rounded-lg p-2 inline-block">NOT APPLIED</h4>
                     <p>Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                     <div>
-                        <button class="btn btn-primary">INTERVIEW</button>
-                        <button class="btn btn-error">REJECTED</button>
+                        <button id="gate-interview" class="btn btn-primary">INTERVIEW</button>
+                        <button id="gate-rejected" class="btn btn-error">REJECTED</button>
                     </div>
                 </div>
-            </div>
+            
+           
+                <div class="bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg">
+                    <div class="flex justify-between">
+                        <h2 class="text-2xl font-bold">Moblie First Crop</h2>
+                        <button class="btn btn-soft bg-transparent mx-4 rounded-[50%] text-1xl px-1 py-1"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                    
+                    <p>React Native Developer</p>
+                    <p>Remote . Full-time . $130,000 -$175,000</p>
+                    <h4 id="application-condition" class="bg-blue-100 rounded-lg p-2 inline-block">NOT APPLIED</h4>
+                    <p>Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div>
+                        <button id="get-interview" class="btn btn-primary">INTERVIEW</button>
+                        <button id="get-rejected" class="btn btn-error">REJECTED</button>
+                    </div>
+                </div>
+           
+        
+
         </section>
 
     </main>
