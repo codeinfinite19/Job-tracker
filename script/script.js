@@ -1,132 +1,251 @@
-let motJobs = document.getElementById("total-job");
+let motJobs       = document.getElementById("total-job");
+let allinterviews = document.getElementById("all-interviews");
+let allrejected   = document.getElementById("all-rejected");
+let alljob        = document.getElementById("all-jobs");
+
+const alljobFilterbtn      = document.getElementById('all-jobFilter');
+const interviewFilterbtn   = document.getElementById('all-interviewfilter');
+const rejectedFilterbtn    = document.getElementById('all-rejectedfilter');
+const filteredJob          = document.getElementById('filtered-section');
+const emptySection         = document.getElementById('empty-section');
+const totalNumberEl        = document.getElementById('TotalNumberOfJob');
+const mainContainer        = document.querySelector('main');
+
 
 let interviewList = [];
-let rejectedList = [];
+let rejectedList  = [];
 
 
+const jobsData = [
+  {
+    name: "Mobile First Corp",
+    title: "React Native Developer",
+    salary: "Remote . Full-time . $130,000 - $175,000",
+    description: "Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.",
+  },
+  {
+    name: "WebFlow Agency",
+    title: "Frontend Developer",
+    salary: "Hybrid . Full-time . $80,000 - $110,000",
+    description: "Design and implement responsive web experiences for modern clients using WebFlow-integrated technology stacks.",
+  },
+  {
+    name: "DataIO Solutions",
+    title: "Data Engineer",
+    salary: "Remote . Full-time . $120,000 - $160,000",
+    description: "Help us create reliable data pipelines and infrastructure using Apache Spark, Kafka, and Flink to power data-driven decisions.",
+  },
+  {
+    name: "CloudFind Inc",
+    title: "Backend Engineer",
+    salary: "Onsite . Full-time . $100,000 - $140,000",
+    description: "Build cloud-based backend systems using Node.js, PostgreSQL, and AWS to power fast and reliable APIs at scale.",
+  },
+  {
+    name: "Innovation Labs",
+    title: "UI/UX Designer",
+    salary: "Remote . Part-time . $70,000 - $90,000",
+    description: "Create beautiful UI and UX frameworks for future digital products with our brilliant development team.",
+  },
+  {
+    name: "MegaByte Solutions",
+    title: "Project Manager",
+    salary: "Hybrid . Full-time . $95,000 - $120,000",
+    description: "Lead cross-functional engineering teams, communicate timelines, and ensure delivery quality and stakeholder alignment.",
+  },
+  {
+    name: "ExampleIQ",
+    title: "Full Stack Developer",
+    salary: "Onsite . Full-time . $90,000 - $120,000",
+    description: "Build and maintain full-stack features using Node.js and React with a team of senior engineers delivering scalable products.",
+  },
+  {
+    name: "TechVorp Solutions",
+    title: "DevOps Engineer",
+    salary: "Remote . Full-time . $110,000 - $145,000",
+    description: "Manage cloud infrastructure, CI/CD pipelines, and containerized deployments using Docker, Kubernetes, and AWS.",
+  },
+];
 
-let allinterviews = document.getElementById("all-interviews");
-let allrejected = document.getElementById("all-rejected");
-let alljob = document.getElementById("all-jobs");
 
-const alljobFilterbtn = document.getElementById('all-jobFilter');
-const interviewFilterbtn = document.getElementById('all-interviewfilter');
-const rejectedFilterbtn = document.getElementById('all-rejectedfilter');
-const filteredJob = document.getElementById('filtered-section');
+function renderAllJobs() {
+  alljob.innerHTML = '';
 
+  for (let job of jobsData) {
+    let div = document.createElement('div');
+    div.classList = 'job-card bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg';
+    div.innerHTML = `
+      <div class="flex justify-between">
+        <h2 class="job-name text-2xl font-bold mt-3">${job.name}</h2>
+        <button class="delete-job btn btn-soft bg-transparent mx-4 rounded-[50%] text-1xl px-1 py-1">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+      <p class="job-title mb-4 text-[#565656]">${job.title}</p>
+      <p class="job-salary mb-4 text-[#565656]">${job.salary}</p>
+      <h4 class="job-status bg-blue-100 text-blue-700 rounded-lg p-2 inline-block mb-4">NOT APPLIED</h4>
+      <p class="job-end-title text-[#565656]">${job.description}</p>
+      <div class="py-4 flex gap-4">
+        <button class="gate-interview btn btn-outline btn-success">INTERVIEW</button>
+        <button class="gate-rejected btn btn-outline btn-error">REJECTED</button>
+      </div>
+    `;
+    alljob.appendChild(div);
+  }
 
-const mainContainer = document.querySelector('main');
-
-
+  calculationTotalJobs();
+}
 
 
 function calculationTotalJobs() {
-    motJobs.innerText = alljob.children.length;
-    allinterviews.innerText = interviewList.length
-    allrejected.innerText = rejectedList.length
+  motJobs.innerText       = alljob.children.length;
+  allinterviews.innerText = interviewList.length;
+  allrejected.innerText   = rejectedList.length;
+  totalNumberEl.innerText = alljob.children.length + ' jobs';
 }
 
- calculationTotalJobs();
 
-
- function togglestyle(id){
-    alljobFilterbtn.classList.remove('btn-primary', 'text-white');
-    interviewFilterbtn.classList.remove('btn-primary', 'text-white');
-    rejectedFilterbtn.classList.remove('btn-primary', 'text-white');
+function togglestyle(id) {
  
+  [alljobFilterbtn, interviewFilterbtn, rejectedFilterbtn].forEach(btn => {
+    btn.classList.remove('btn-primary', 'text-white');
+    btn.classList.add('btn-outline');
+  });
 
-    if(id === 'all-jobFilter'){
-        alljobFilterbtn.classList.add('btn-primary', 'text-white');
-        alljobFilterbtn.classList.remove('btn-outline');
+  if (id === 'all-jobFilter') {
+    alljobFilterbtn.classList.add('btn-primary', 'text-white');
+    alljobFilterbtn.classList.remove('btn-outline');
 
-    }
-    else if(id === 'all-interviewfilter'){
-        interviewFilterbtn.classList.add('btn-primary', 'text-white');
-        interviewFilterbtn.classList.remove('btn-outline');
-        filteredJob.classList.add('hidden');
-       
-    }
-    else if(id === 'all-rejectedfilter'){
-        rejectedFilterbtn.classList.add('btn-primary', 'text-white');
-        rejectedFilterbtn.classList.remove('btn-outline');
-    }
-    
- }
+  
+    alljob.classList.remove('hidden');
+    filteredJob.classList.add('hidden');
+    emptySection.classList.add('hidden');
 
-
- let getinterviewbtn = document.getElementById('get-interview');
- let getrejectedbtn = document.getElementById('get-rejected');
-
- 
- mainContainer.addEventListener('click', function(event){
-    
-        console.log(event.target.classList.contentains('gate-interview'));
-
-    if(event.target.classList.contentains('gate-interview')){
-         const parentNode = event.target.parentNode.parentNode;
+  } else if (id === 'all-interviewfilter') {
+    interviewFilterbtn.classList.add('btn-primary', 'text-white');
+    interviewFilterbtn.classList.remove('btn-outline');
 
     
-    const jobTitle = parentNode.querySelector('.job-title').innerText;
+    alljob.classList.add('hidden');
+    renderFilteredList(interviewList);
+
+  } else if (id === 'all-rejectedfilter') {
+    rejectedFilterbtn.classList.add('btn-primary', 'text-white');
+    rejectedFilterbtn.classList.remove('btn-outline');
+
+    
+    alljob.classList.add('hidden');
+    renderFilteredList(rejectedList);
+  }
+}
+
+
+function renderFilteredList(list) {
+  filteredJob.innerHTML = '';
+
+  if (list.length === 0) {
+    filteredJob.classList.add('hidden');
+    emptySection.classList.remove('hidden');
+    totalNumberEl.innerText = '0 jobs';
+    return;
+  }
+
+  emptySection.classList.add('hidden');
+  filteredJob.classList.remove('hidden');
+  totalNumberEl.innerText = list.length + ' jobs';
+
+  for (let job of list) {
+    let statusLabel = job.status === 'interview'
+      ? '<h4 class="job-status bg-green-100 text-green-700 rounded-lg p-2 inline-block mb-4">INTERVIEW</h4>'
+      : '<h4 class="job-status bg-red-100 text-red-700 rounded-lg p-2 inline-block mb-4">REJECTED</h4>';
+
+    let div = document.createElement('div');
+    div.classList = 'job-card bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg';
+    div.innerHTML = `
+      <div class="flex justify-between">
+        <h2 class="job-name text-2xl font-bold mt-3">${job.companyName}</h2>
+      </div>
+      <p class="job-title mb-4 text-[#565656]">${job.jobTitle}</p>
+      <p class="job-salary mb-4 text-[#565656]">${job.jobLocation}</p>
+      ${statusLabel}
+      <p class="job-end-title text-[#565656]">${job.jobendtitle}</p>
+    `;
+    filteredJob.appendChild(div);
+  }
+}
+
+
+mainContainer.addEventListener('click', function (event) {
+
+  
+  if (event.target.classList.contains('gate-interview')) {
+    const parentNode = event.target.parentNode.parentNode;
+
+    const jobTitle    = parentNode.querySelector('.job-title').innerText;
     const companyName = parentNode.querySelector('.job-name').innerText;
     const jobLocation = parentNode.querySelector('.job-salary').innerText;
-    const applicationCondition = parentNode.querySelector('.job-application-condition').innerText;
     const jobendtitle = parentNode.querySelector('.job-end-title').innerText;
-    parentNode.querySelector('.status')
-    const divinfo ={
-        jobTitle,
-        companyName,
-        jobLocation,
-        applicationCondition : 'APPLIED',
-        jobendtitle
-    }
 
+    const divinfo = { jobTitle, companyName, jobLocation, jobendtitle, status: 'interview' };
 
+    
+    const inRejected = rejectedList.findIndex(item => item.jobTitle === divinfo.jobTitle);
+    if (inRejected !== -1) rejectedList.splice(inRejected, 1);
 
-   const jobExistsInInterviewList = interviewList.find( item=> item.jobTitle === divinfo.jobTitle);
-   const jobExistsInRejectedList = rejectedList.find( item=> item.jobTitle === divinfo.jobTitle);
+    
+    const inInterview = interviewList.find(item => item.jobTitle === divinfo.jobTitle);
+    if (!inInterview) interviewList.push(divinfo);
 
-   
-   if(!jobExistsInInterviewList){
-    interviewList.push(divinfo);
-   }
+    
+    const statusBadge = parentNode.querySelector('.job-status');
+    statusBadge.className = 'job-status bg-green-100 text-green-700 rounded-lg p-2 inline-block mb-4';
+    statusBadge.innerText = 'INTERVIEW';
 
-   
+    calculationTotalJobs();
+  }
 
  
-    } 
- })
+  if (event.target.classList.contains('gate-rejected')) {
+    const parentNode = event.target.parentNode.parentNode;
 
+    const jobTitle    = parentNode.querySelector('.job-title').innerText;
+    const companyName = parentNode.querySelector('.job-name').innerText;
+    const jobLocation = parentNode.querySelector('.job-salary').innerText;
+    const jobendtitle = parentNode.querySelector('.job-end-title').innerText;
 
- function renderInterviewList(){
+    const divinfo = { jobTitle, companyName, jobLocation, jobendtitle, status: 'rejected' };
 
-     
-    filteredJob.innerHTML = '';
+    
+    const inInterview = interviewList.findIndex(item => item.jobTitle === divinfo.jobTitle);
+    if (inInterview !== -1) interviewList.splice(inInterview, 1);
 
-    for(let interview of interviewList){
-        let div = document.createElement('div');
-        div.classList = 'bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg'
-        div.innerHTML = `<div class="flex justify-between ">
-                        <h2 class="job-name text-2xl font-bold mt-3">Moblie First Crop</h2>
-                        <button class="btn btn-soft bg-transparent mx-4 rounded-[50%] text-1xl px-1 py-1"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
-                    
-                    <p class="job-title mb-4 text-[#565656]">React Native Developer</p>
-                    <p class="job-salary mb-4 text-[#565656]">Remote . Full-time . $130,000 -$175,000</p>
-                    <h4 id="application-condition" class="job-application-condition bg-blue-100 rounded-lg p-2 inline-block mb-4">NOT APPLIED</h4>
-                    <p class="job-end-title text-[#565656]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+    
+    const inRejected = rejectedList.find(item => item.jobTitle === divinfo.jobTitle);
+    if (!inRejected) rejectedList.push(divinfo);
 
-                    <div class="py-4 flex gap-4">
-                        <button id="gate-interview" class="btn btn-outline btn-success">INTERVIEW</button>
-                        <button id="gate-rejected" class="btn btn-outline btn-error">REJECTED</button>
-                    </div>
-`
-                    filteredJob.appendChild(div);
+    
+    const statusBadge = parentNode.querySelector('.job-status');
+    statusBadge.className = 'job-status bg-red-100 text-red-700 rounded-lg p-2 inline-block mb-4';
+    statusBadge.innerText = 'REJECTED';
+
+    calculationTotalJobs();
+  }
 
  
- }}
+  if (event.target.closest('.delete-job')) {
+    const parentNode = event.target.closest('.job-card');
+
+    const jobTitle = parentNode.querySelector('.job-title').innerText;
+
+   
+    interviewList = interviewList.filter(item => item.jobTitle !== jobTitle);
+    rejectedList  = rejectedList.filter(item => item.jobTitle !== jobTitle);
+
+    parentNode.remove();
+    calculationTotalJobs();
+  }
+
+});
 
 
-
-
-
-
+renderAllJobs();
