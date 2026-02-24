@@ -68,6 +68,12 @@ const jobsData = [
     salary: "Remote . Full-time . $110,000 - $145,000",
     description: "Manage cloud infrastructure, CI/CD pipelines, and containerized deployments using Docker, Kubernetes, and AWS.",
   },
+  {
+    name: "Samsung",
+    title: "Junior Frontend Developer",
+    salary: "Full-time . $110,000 - $145,000",
+    description: "Web Design and Manage cloud infrastructure, CI/CD pipelines, and containerized deployments using Docker, Kubernetes, and AWS.",
+  },
 ];
 
 
