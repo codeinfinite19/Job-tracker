@@ -43,6 +43,7 @@ function calculationTotalJobs() {
     else if(id === 'all-interviewfilter'){
         interviewFilterbtn.classList.add('btn-primary', 'text-white');
         interviewFilterbtn.classList.remove('btn-outline');
+        filteredJob.classList.add('hidden');
        
     }
     else if(id === 'all-rejectedfilter'){
@@ -58,22 +59,24 @@ function calculationTotalJobs() {
 
  
  mainContainer.addEventListener('click', function(event){
+    
+        console.log(event.target.classList.contentains('gate-interview'));
 
     if(event.target.classList.contentains('gate-interview')){
          const parentNode = event.target.parentNode.parentNode;
-         
+
     
     const jobTitle = parentNode.querySelector('.job-title').innerText;
     const companyName = parentNode.querySelector('.job-name').innerText;
     const jobLocation = parentNode.querySelector('.job-salary').innerText;
     const applicationCondition = parentNode.querySelector('.job-application-condition').innerText;
     const jobendtitle = parentNode.querySelector('.job-end-title').innerText;
-
+    parentNode.querySelector('.status')
     const divinfo ={
         jobTitle,
         companyName,
         jobLocation,
-        applicationCondition,
+        applicationCondition : 'APPLIED',
         jobendtitle
     }
 
@@ -86,6 +89,8 @@ function calculationTotalJobs() {
    if(!jobExistsInInterviewList){
     interviewList.push(divinfo);
    }
+
+   
 
  
     } 
@@ -100,23 +105,27 @@ function calculationTotalJobs() {
     for(let interview of interviewList){
         let div = document.createElement('div');
         div.classList = 'bg-white py-4 mt-[10px] pl-4 shadow-lg rounded-lg'
-        div.innerHTML = `<div class="flex justify-between">
-                        <h2 class="job-name text-2xl font-bold">${interview.companyName}</h2>
+        div.innerHTML = `<div class="flex justify-between ">
+                        <h2 class="job-name text-2xl font-bold mt-3">Moblie First Crop</h2>
                         <button class="btn btn-soft bg-transparent mx-4 rounded-[50%] text-1xl px-1 py-1"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                     
-                    <p class="job-title">${interview.jobTitle}</p>
-                    <p class="job-salary">Remote . Full-time . $130,000 -$175,000</p>
-                    <h4 id="application-condition" class="job-application-condition bg-blue-100 rounded-lg p-2 inline-block">NOT APPLIED</h4>
-                    <p class="job-end-title">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <p class="job-title mb-4 text-[#565656]">React Native Developer</p>
+                    <p class="job-salary mb-4 text-[#565656]">Remote . Full-time . $130,000 -$175,000</p>
+                    <h4 id="application-condition" class="job-application-condition bg-blue-100 rounded-lg p-2 inline-block mb-4">NOT APPLIED</h4>
+                    <p class="job-end-title text-[#565656]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
 
-                    <div>
-                        <button id="gate-interview" class="btn btn-primary">INTERVIEW</button>
-                        <button id="gate-rejected" class="btn btn-error">REJECTED</button>
-                    </div>`
+                    <div class="py-4 flex gap-4">
+                        <button id="gate-interview" class="btn btn-outline btn-success">INTERVIEW</button>
+                        <button id="gate-rejected" class="btn btn-outline btn-error">REJECTED</button>
+                    </div>
+`
+                    filteredJob.appendChild(div);
 
  
  }}
+
+
 
 
 
